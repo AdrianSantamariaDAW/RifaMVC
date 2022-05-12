@@ -20,6 +20,9 @@ public class ControlRifa {
 
 	VistaMenúBásico vista;
 	private static final String[] OPCIONES_MENÚ_PRINCIPAL = { "Elegir objeto", "Salir", "Historial" };
+	
+	int aciertos=0;
+	int intentos=0;
 
 	public ControlRifa(Scanner entrada) {
 		this.entrada = entrada;
@@ -87,8 +90,11 @@ public class ControlRifa {
 
 		if (objetoElegido == objetoGanador) {
 			mensaje = "   ** ¡Mala suerte le llueve a tu compañero!";
+			aciertos++;
+			intentos++;
 		} else {
 			mensaje = "   ** ¡Suerte que te libraste!";
+			intentos++;
 		}
 		Vista.mostrarTexto(mensaje);
 
@@ -98,6 +104,8 @@ public class ControlRifa {
 	public void historialAciertos() {
 		for (int i = 0; i<listaFetiches.size();i++)
 		Vista.mostrarTexto(listaFetiches.get(i).toString());
+		Vista.mostrarTexto("Nº Intentos"+" "+Integer.toString(intentos));
+		Vista.mostrarTexto("Nº Aciertos"+" "+Integer.toString(aciertos));
 		 
 	}
 //	+ operaciónNoImplementada(): void
