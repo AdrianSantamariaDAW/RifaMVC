@@ -14,11 +14,12 @@ public class ControlRifa {
 	private List<Fetiche> listaFetiches;
 //	- listaFetiches: List<String>
 
+	
 	private Scanner entrada;
 //	- entrada: Scanner
 
 	VistaMenúBásico vista;
-	private static final String[] OPCIONES_MENÚ_PRINCIPAL = { "Elegir objeto", "Salir" };
+	private static final String[] OPCIONES_MENÚ_PRINCIPAL = { "Elegir objeto", "Salir", "Historial" };
 
 	public ControlRifa(Scanner entrada) {
 		this.entrada = entrada;
@@ -56,7 +57,7 @@ public class ControlRifa {
 				Vista.mostrarTexto("\n\n«Programa finalizado»\n\n");
 				break;
 			default:
-				operaciónNoImplementada();
+				historialAciertos();
 				break;
 			}
 		} while (!fin);
@@ -78,7 +79,9 @@ public class ControlRifa {
 
 		objetoElegido = Fetiche.values()[opción - 1];
 		objetoGanador = Fetiche.sortear();
-
+		
+		listaFetiches.add(objetoGanador);
+		
 		mensaje = String.format("   ** ¡Ha salido «%s»!", objetoGanador);
 		Vista.mostrarTexto(mensaje);
 
@@ -92,9 +95,10 @@ public class ControlRifa {
 		vistaSorteo.pedirContinuar();
 	}
 
-	public void operaciónNoImplementada() {
-		Vista.mostrarTexto(" --> Operación no implementada todavía…\n");
-		Vista.esperar(2000); // 2 s.
+	public void historialAciertos() {
+		for (int i = 0; i<listaFetiches.size();i++)
+		Vista.mostrarTexto(listaFetiches.get(i).toString());
+		 
 	}
 //	+ operaciónNoImplementada(): void
 
